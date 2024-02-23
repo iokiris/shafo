@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*%tj8j1o0m3q+th+b_tw99m(m402%_)pis53+zhn9s*_jp9^ue
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'backend'
+    '*'
 ]
 
 
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+    'api.middleware.FilterHostMiddleware'
 ]
 
 ROOT_URLCONF = 'webapp.urls'

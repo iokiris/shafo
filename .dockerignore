@@ -1,9 +1,5 @@
-node_modules
 .git
 .gitignore
 .dockerignore
-npm-debug.log
-build
-.DS_Store
 .vscode
 __pycache__

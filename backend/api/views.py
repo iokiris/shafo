@@ -6,5 +6,5 @@ from datetime import datetime
 def view_title(req):
     print("получен запрос")
     return JsonResponse({
-        "message": datetime.now()
+        "message": datetime.now().strftime("%H:%M:%S")
     })

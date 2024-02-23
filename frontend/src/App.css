@@ -1,53 +1,126 @@
+/* App.css */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end;
+  background-color: none;
+  padding: 0 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header {
+  width: 90%;
+  max-width: 600px;
+  padding: 0px 20px;
+  border-radius: 12px;
+  background-color: none;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  /* padding-bottom: 100px; */
+  padding-bottom: 100px;}
+
+.App-header::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="text"], button {
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #FF9100;
+  color: #FFF;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #FFA726;
+  transform: translateY(-2px);
+}
+
+.messages {
+  
+}
+
+.message-time {
+  font-size: 0.75rem; /* Меньший размер шрифта для времени */
+  position: absolute; /* Абсолютное позиционирование внутри .message */
+  bottom: 5px; /* Отступ снизу */
+  right: 10px; /* Отступ справа */
+  color: #666; /* Цвет текста времени */
+}
+
+.name-input {
+  display: flex;
+}
+
+.message-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.message-input {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+}
+
+.message {
+  background: #FFECB3;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  width: 25vw;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.user-message {
+  margin-left: auto;
+  background-color: #DCF8C6; /* Светло-зеленый фон, например */
+}
+
+/* Стили для сообщений от других пользователей */
+.other-message {
+  margin-right: auto;
+  background-color: #FFECB3; /* Было использовано ранее */
+}
+
+.author {
+  font-weight: bold;
+  color: #EF6C00;
+}
+
+.message-content {
+  margin-top: 5px;
+  color: #333;
+}
+
+input[type="text"] {
+  flex-grow: 1; /* Позволяет полю ввода занимать все доступное пространство */
+  margin-right: 10px; /* Добавляем отступ справа от кнопки */
+}
+
+button {
+  min-width: 50px; /* Минимальная ширина кнопки, чтобы она не была слишком маленькой */
 }
