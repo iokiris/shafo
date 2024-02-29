@@ -1,0 +1,50 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05); /* Слегка прозрачный фон */
+  backdrop-filter: blur(10px); /* Размытие фона за элементом */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Мягкая тень */
+  border-radius: 15px; /* Скруглённые углы */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Слегка видимая граница */
+}
+
+.login-form input {
+  margin: 15px 0;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Скруглённые углы для полей ввода */
+  color: #ddd;
+  font-size: 16px; /* Больший размер шрифта */
+  transition: all 0.3s ease-in-out; /* Плавное изменение */
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #719ECE;
+  background-color: rgba(255, 255, 255, 0.05); /* Слегка выделяем фокусируемый элемент */
+}
+
+.login-form button {
+  padding: 15px;
+  margin-top: 20px; /* Добавляем немного пространства сверху */
+  border: none;
+  border-radius: 12px; /* Скруглённые углы для кнопки */
+  background-image: linear-gradient(145deg, #007bff, #6610f2); /* Градиент для кнопки */
+  color: white;
+  cursor: pointer;
+  font-size: 16px; /* Увеличиваем шрифт кнопки */
+  transition: all 0.3s ease-in-out; /* Плавное изменение */
+}
+
+.login-form button:hover {
+  box-shadow: 0 0 15px #719ECE; /* Добавляем тень при наведении */
+}

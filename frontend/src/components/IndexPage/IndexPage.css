@@ -1,0 +1,61 @@
+
+
+.index-page {
+  min-height: 100vh; /* Полная высота страницы */
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Слегка прозрачный фон для хедера */
+  backdrop-filter: blur(5px); /* Размытие фона за хедером */
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 400;
+  color: #FFD700; /* Золотой цвет для заголовка, добавляет роскоши */
+}
+
+.user-info {
+  background-color: #FF4500; /* Ярко-оранжевый цвет для кнопки пользователя */
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.user-info:hover {
+  background-color: #CD3700; /* Темно-оранжевый цвет при наведении */
+  cursor: pointer;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome-text p, .feature-svg {
+  margin: 20px 0;
+  font-size: 1.1rem;
+  max-width: 600px;
+  color: #ADD8E6; /* Светло-голубой цвет текста для лучшей читаемости на темном фоне */
+}
+
+.feature-svg {
+  /* Дополнительные стили для SVG секции */
+  fill: #ADD8E6; /* Пример изменения цвета SVG, если возможно */
+}
+
+.user-action:hover {
+  cursor: pointer;
+}
