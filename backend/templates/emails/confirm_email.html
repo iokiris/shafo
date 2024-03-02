@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f0c29;
+            color: #ffffff;
+        }
+        .email-container {
+            background-color: #24243e;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #302b63;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body style="max-width: 275px;">
+    <div class="email-container" style="color: #ffffff;">
+        <h2 style="color: #ffffff;">SHAFO: Подтверждение Email</h2>
+        <strong style="color: #ffffff">Если вы не создавали аккаунт SHAFO, проигнорируйте это письмо.</strong>
+        <br><br>
+        <p style="color: #ffffff;">Пожалуйста, подтвердите ваш email, перейдя по ссылке ниже:</p>
+        <a href="{{ confirmation_url }}" class="button" style="color: #ffffff;">Подтвердить Email</a>
+    </div>
+</body></html>

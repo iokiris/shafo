@@ -7,7 +7,8 @@ WORKDIR /app
 
 COPY requirements.txt ./
 COPY pyproject.toml poetry.lock* /app/
-# Установка зависимостей проекта
+
+# завсимости
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
 

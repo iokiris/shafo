@@ -1,3 +1,4 @@
+from django.forms import ValidationError
 from rest_framework.serializers import CharField, ModelSerializer
 from django.contrib.auth import get_user_model
 
@@ -9,6 +10,12 @@ class UserRegSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise ValidationError('Email занят')
+        return value
+
 
     def create(self, validated_data):
         user = User.objects.create_user(

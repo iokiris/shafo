@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PasswordInput from '../PasswordInput';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post('auth/login/', {
         username,
@@ -16,10 +19,10 @@ const Login = (props) => {
         props.onSuccess();
       }
       console.log(response.data);
-      // Обработайте успешный вход здесь
     } catch (error) {
       console.error(error);
-      // Обработайте ошибку логина здесь
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -29,17 +32,19 @@ const Login = (props) => {
         <h2 className='logo'>SHAFO</h2>
         <input
           type="text"
-          placeholder="Имя пользователя"
+          placeholder="Email или имя пользователя"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          disabled={isLoading}
         />
-        <input
-          type="password"
-          placeholder="Пароль"
+        <PasswordInput
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoading}
         />
-        <button type="submit">Войти</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? '⏳' : 'Войти'}
+        </button>
         <div className="additional-links">
           <a href="?act=register">Регистрация</a>
           <a href="/forgot-password">Забыли пароль?</a>

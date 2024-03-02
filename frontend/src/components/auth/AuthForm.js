@@ -24,11 +24,10 @@ const AuthForm = (props) => {
     };
 
     checkAuthorization();
-  }, [navigate, authChecked]); // Добавляем authChecked в зависимости
+  }, [navigate, authChecked]);
 
-  // Функция для обновления состояния authChecked
   const onAuthSuccess = () => {
-    setAuthChecked(prev => !prev); // Инвертируем состояние, чтобы вызвать повторную проверку
+    setAuthChecked(prev => !prev);
   };
 
   return (

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './IndexPage.css';
 import axios from 'axios';
 
-const IndexPage = () => {
+export default function IndexPage() {
   const [username, setUsername] = useState('');
   let navigate = useNavigate();
 
@@ -41,11 +41,9 @@ const IndexPage = () => {
           <p>Welcome to SHAFO</p>
         </section>
         <section className="feature-svg">
-          {/* Здесь может быть ваш SVG контент */}
         </section>
       </main>
     </div>
   );
 };
 
-export default IndexPage;

@@ -5,6 +5,7 @@ import uuid
 # Create your models here.
 
 class UserWithEmail(AbstractUser):
+    email = models.EmailField(unique=True)
     confirmed_email = models.BooleanField(default=False)
 
 class EmailConfirmToken(models.Model):
