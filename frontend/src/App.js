@@ -5,6 +5,7 @@ import AuthForm from './components/auth/AuthForm';
 import IndexPage from './components/IndexPage/IndexPage';
 import EmailConfirm from './components/auth/EmailConfirm/EmailConfirm'
 import Exception from './components/exceptions/Exception';
+import PhotoUploader from './components/features/PhotoUploader/PhotoUploader';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/auth/*" element={<AuthForm />} />
           <Route path="/auth/confirm_email/:token" element={<EmailConfirm />} />
           <Route path="/" element={<IndexPage />} />
+          <Route path="/ai/analyze-face/" element={<PhotoUploader />} />
           <Route path="*" element={<Exception type="notFound" />} />
         </Routes>
       </div>

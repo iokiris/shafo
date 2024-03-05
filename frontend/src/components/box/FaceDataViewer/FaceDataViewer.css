@@ -1,0 +1,18 @@
+.faceDataContainer {
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 0.8em;
+  }
+  
+  .dataField {
+    margin-bottom: 10px;
+  }
+  
+  .dataField strong {
+    margin-right: 5px;
+  }
+  

@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from api.utils.email import send_email_message
+from utils.email import send_email_message
 from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
