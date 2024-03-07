@@ -2,7 +2,6 @@ import React from 'react';
 import './FaceDataViewer.css';
 
 function FaceDataViewer({ data }) {
-    // Проверка на существование данных
     if (!data || data.length === 0) {
       return <div className="faceDataContainer">Данные не найдены</div>;
     }
@@ -11,21 +10,32 @@ function FaceDataViewer({ data }) {
   
     const racesArray = Object.entries(faceData.race || {}).map(([race, value]) => ({
       race: translateRace(race),
-      value: value ? value.toFixed(2) : '0.00', // Добавлена проверка на существование value
-    })).sort((a, b) => b.value - a.value);
+      value: value ? value.toFixed(2) : '0.00',
+    })).filter(race => race.value !== '0.00') // Фильтрация элементов с нулевыми значениями
+    .sort((a, b) => b.value - a.value);
+
+    const emotionsArray = Object.entries(faceData.emotion || {}).map(([emotion, value]) => ({
+      emotion: translateEmotion(emotion),
+      value: value ? value.toFixed(2) : '0.00',
+    })).filter(emotion => emotion.value !== '0.00') // Фильтрация элементов с нулевыми значениями
+    .sort((a, b) => b.value - a.value);
 
   return (
     <div className="faceDataContainer">
       <h2>Результаты анализа лица</h2>
-      <div className="dataField"><strong>Возраст:</strong> {faceData.age}</div>
-      <div className="dataField"><strong>Пол:</strong> {faceData.dominant_gender === "Man" ? "Мужчина" : "Женщина"}</div>
-      <div className="dataField"><strong>Расы:</strong> {racesArray.map(race => `${race.race}: ${race.value}%`).join(', ')}</div>
-      <div className="dataField"><strong>Доминирующая эмоция:</strong> {translateEmotion(faceData.dominant_emotion)}</div>
       <div className="dataField">
-        <strong>Эмоции:</strong> Злость: {faceData.emotion.angry.toFixed(2)}%, Отвращение: {faceData.emotion.disgust.toFixed(2)}%, Страх: {faceData.emotion.fear.toFixed(2)}%, Счастье: {faceData.emotion.happy.toFixed(2)}%, Грусть: {faceData.emotion.sad.toFixed(2)}%, Удивление: {faceData.emotion.surprise.toFixed(2)}%, Нейтральность: {faceData.emotion.neutral.toFixed(2)}%
+  <strong>Расы:</strong>
+  <ul className="raceList">
+    {racesArray.map(race => <li key={race.race}>{race.race}: <span className="valuePercentage">{race.value}%</span></li>)}
+  </ul>
+</div>
+<div className="dataField">
+  <strong>Эмоции:</strong>
+  <ul className="emotionList">
+    {emotionsArray.map(emotion => <li key={emotion.emotion}>{emotion.emotion}: <span className="valuePercentage">{emotion.value}%</span></li>)}
+  </ul>
+</div>
       </div>
-      <div className="dataField"><strong>Точность сканирования лица:</strong> {faceData.face_confidence}</div>
-    </div>
   );
 }
 function translateRace(race) {

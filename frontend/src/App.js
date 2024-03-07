@@ -1,11 +1,29 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './services/AuthProvider/AuthProvider';
 import AuthForm from './components/auth/AuthForm';
 import IndexPage from './components/IndexPage/IndexPage';
 import EmailConfirm from './components/auth/EmailConfirm/EmailConfirm'
 import Exception from './components/exceptions/Exception';
 import PhotoUploader from './components/features/PhotoUploader/PhotoUploader';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+axios.defaults.baseURL = '/';
+
+axios.interceptors.request.use(config => {
+  const csrfToken = Cookies.get('csrftoken');
+  
+  if (csrfToken) {
+    config.headers['X-CSRFToken'] = csrfToken;
+  }
+
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
 
 function App() {
   return (

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './PhotoBox.css';
 
 function PhotoBox({ onFileSelect }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,10 +11,17 @@ function PhotoBox({ onFileSelect }) {
       onFileSelect(file);
     }
   };
+  const truncateFileName = (fileName, maxLength) => {
+    if (fileName.length <= maxLength) return fileName;
+    return `${fileName.substring(0, maxLength - 3)}...`;
+  };  
 
   return (
     <>
-      <input type="file" onChange={handleFileChange} />
+      <label className="file-upload-wrapper">
+        Загрузить фото
+        <input type="file" onChange={handleFileChange} />
+      </label>
     </>
   );
 }

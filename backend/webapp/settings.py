@@ -72,9 +72,11 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '30/minute',
         'user': '60/minute',
-        'send_confirm_email': '1/minute'
+        'send_confirm_email': '1/minute',
+        'global_ai': '5/minute'
     }
 }
+
 
 
 MIDDLEWARE = [

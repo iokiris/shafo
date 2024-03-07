@@ -13,7 +13,6 @@
   
   .imagePreview {
     max-width: 100%;
-    max-height: 320px;
     border-radius: 10px;
     border: 2px solid #ddd;
     padding: 10px;
@@ -27,8 +26,8 @@
   }
   
   img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 200px;
+    max-height: 200px;
     margin: 10px 0;
     border-radius: 8px;
   }

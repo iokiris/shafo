@@ -12,7 +12,7 @@ from rest_framework import status
 from .serializers import UserRegSerializer
 from .models import EmailConfirmToken
 # Create your views here.
-
+import logging
 @api_view(['POST'])
 def register_user(request):
     serializer = UserRegSerializer(data=request.data)
@@ -49,6 +49,7 @@ def logout_user(request):
 
 @api_view(['GET'])
 def check_auth(request):
+    print("ORIGIN:", request.META.get('HTTP_ORIGIN', 'unknown'))
     if request.user.is_authenticated:
         return Response({
             "username": request.user.username
