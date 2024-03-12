@@ -6,7 +6,7 @@ const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const[error, setError] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -20,7 +20,16 @@ const Login = (props) => {
       }
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 400) {
+          setError('Неверно введены данные');
+        }
+        if (status === 429) {
+          setError('Повторите попытку позже.')
+        }
+      }
+      else setError('Не удалось войти в аккаунт')
     } finally {
       setIsLoading(false);
     }
@@ -30,6 +39,7 @@ const Login = (props) => {
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className='logo'>SHAFO</h2>
+        <label className='error-label'>{error}</label>
         <input
           type="text"
           placeholder="Email или имя пользователя"

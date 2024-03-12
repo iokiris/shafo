@@ -9,7 +9,6 @@
 
 header {
   width: calc(100% - 40px);
-  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,6 +68,11 @@ header {
   .right-section {
     padding-left: 0;
     padding-top: 20px;
+  }
+
+  .logo-svg {
+    width: 250px;
+    height: 250px;
   }
 }
 

@@ -49,6 +49,10 @@
   box-shadow: 0 0 4px #719ECE;
 }
 
+.logo {
+  margin-bottom: 5px;
+}
+
 a {
   color: var(--legit-blue);
   text-decoration: none;
@@ -110,4 +114,15 @@ input[type="password"]::-ms-reveal {
   .login-container, .login-form {
     padding: 20px;
   }
+}
+
+.invalid-inp {
+  border-color: red !important;
+}
+
+.error-label {
+  text-align: center;
+  font-size: 0.8em;
+  color: red;
+  font-weight: bold;
 }
