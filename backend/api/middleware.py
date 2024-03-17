@@ -1,4 +1,4 @@
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden
 from django.core.handlers.wsgi import WSGIRequest
 
 class FilterHostMiddleware:
@@ -6,10 +6,9 @@ class FilterHostMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: WSGIRequest):
-        if request.path.startswith('/api'):
-            origin = request.META.get('HTTP_X_API_KEY')
-            print("Meta:", origin)
-            if origin != 'Allow':
-                return HttpResponseForbidden()
+        # if request.path.startswith('/api'):
+        #     origin = request.META.get('HTTP_X_API_KEY')
+        #     if origin != 'Allow':
+        #         return HttpResponseForbidden()
         response = self.get_response(request)
-        return response 
+        return response

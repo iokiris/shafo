@@ -5,14 +5,16 @@ from rest_framework import status
 from .throttling import GlobalAiThrottle
 from common.forms import ImageUploadForm
 from utils.images import convert_to_np
+from django.shortcuts import redirect
 
-from .deep.scanner import analyze_image_face
+#from .deep.scanner import analyze_image_face
 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @throttle_classes([GlobalAiThrottle])
 def analyze_face_view(request):
+    return Response(status=status.HTTP_403_FORBIDDEN)
     form = ImageUploadForm(request.POST, request.FILES)
     if form.is_valid():
         converted_image = convert_to_np(form.cleaned_data['image'])
@@ -20,3 +22,4 @@ def analyze_face_view(request):
         if result:
             return Response(result)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+

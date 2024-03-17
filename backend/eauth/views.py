@@ -5,15 +5,17 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.response import Response
 from rest_framework.exceptions import Throttled
 from rest_framework import status
 from .serializers import UserRegSerializer
 from .models import EmailConfirmToken
+from .throttling import GlobalAuthThrottle
 # Create your views here.
 import logging
 @api_view(['POST'])
+@throttle_classes([GlobalAuthThrottle])
 def register_user(request):
     serializer = UserRegSerializer(data=request.data)
     if serializer.is_valid():
@@ -32,6 +34,7 @@ def register_user(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+@throttle_classes([GlobalAuthThrottle])
 def login_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -49,7 +52,6 @@ def logout_user(request):
 
 @api_view(['GET'])
 def check_auth(request):
-    print("ORIGIN:", request.META.get('HTTP_ORIGIN', 'unknown'))
     if request.user.is_authenticated:
         return Response({
             "username": request.user.username

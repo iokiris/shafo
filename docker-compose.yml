@@ -33,6 +33,14 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - '5432:5432'
+  cservice:
+    build: ./cservice
+    volumes:
+      - ./cservice:/app
+      - /app/tmp
+    ports:
+      - '8080:8080'
+    working_dir: /app
 
 volumes:
   db_data:

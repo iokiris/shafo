@@ -4,7 +4,6 @@ import './PhotoBox.css';
 function PhotoBox({ onFileSelect }) {
   const [selectedFile, setSelectedFile] = useState(null);
   useEffect(() => {
-    // Функция для обработки события вставки
     const handlePaste = (event) => {
       const items = (event.clipboardData || event.originalEvent.clipboardData).items;
       for (let item of items) {
@@ -17,10 +16,8 @@ function PhotoBox({ onFileSelect }) {
       }
     };
 
-    // Добавляем обработчик события вставки
     document.addEventListener('paste', handlePaste);
 
-    // Удаляем обработчик события, когда компонент будет размонтирован
     return () => {
       document.removeEventListener('paste', handlePaste);
     };
@@ -61,10 +58,6 @@ function PhotoBox({ onFileSelect }) {
           style={{ display: 'none' }}
         />
       </div>
-      {/* <label className="file-upload-wrapper">
-        Загрузить фото
-        <input type="file" onChange={handleFileChange} />
-      </label> */}
     </>
   );
 }
