@@ -5,12 +5,12 @@ WORKDIR /app
 RUN go install github.com/githubnemo/CompileDaemon@latest
 
 COPY go.mod ./
-#COPY go.sum ./
-RUN go mod download
+COPY go.sum ./
+RUN go mod tidy
 
 COPY . .
 
-CMD ["CompileDaemon", "-polling=true", "-log-prefix=false", "-build=go build -o ./tmp/myapp ./cmd/cservice", "-command=./tmp/myapp"]
+CMD ["CompileDaemon", "-polling=true", "-log-prefix=true", "-build=go build -o ./tmp/myapp ./cmd/cservice", "-command=./tmp/myapp"]
 
 
 

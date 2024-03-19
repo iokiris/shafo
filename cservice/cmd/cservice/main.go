@@ -1,13 +1,29 @@
 package main
 
 import (
+	"cservice/db"
 	"cservice/internal/handler"
+	"fmt"
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Failed to load .env")
+	}
+
+	var connectionString = fmt.Sprintf("host=pgdb dbname=%s password=%s user=%s sslmode=disable",
+		os.Getenv("POSTGRES_DB"),
+		os.Getenv("POSTGRES_PASSWORD"),
+		os.Getenv("POSTGRES_USER"))
+	fmt.Println(connectionString)
+	db.InitDB(connectionString)
+
 	http.HandleFunc("/", handler.RootHandler)
 	http.HandleFunc("/status", handler.PingHandler)
 
@@ -19,7 +35,7 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	log.Println("[99] Listening for " + server.Addr)
+	log.Println("[Main]: Listening for " + server.Addr)
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}
