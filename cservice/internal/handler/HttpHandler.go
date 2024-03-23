@@ -52,7 +52,6 @@ func GetFullUrlFromShort(w http.ResponseWriter, r *http.Request) {
 	}
 
 	shortUrl := r.URL.Query().Get("shortUrl")
-	fmt.Println(shortUrl)
 
 	if shortUrl == "" {
 		http.Error(w, "ShortUrl parameter is required", http.StatusBadRequest)

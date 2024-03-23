@@ -57,7 +57,6 @@ func GetAllTables() {
 			log.Fatalf("Ошибка при чтении строки: %v\n", err)
 			return
 		}
-		fmt.Println(tableName)
 	}
 
 	if err := rows.Err(); err != nil {
