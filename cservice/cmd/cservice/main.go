@@ -24,8 +24,10 @@ func main() {
 	fmt.Println(connectionString)
 	db.InitDB(connectionString)
 
-	http.HandleFunc("/", handler.RootHandler)
 	http.HandleFunc("/status", handler.PingHandler)
+	http.HandleFunc("/add", handler.AddShortcut)
+	http.HandleFunc("/getByShort", handler.GetFullUrlFromShort)
+	http.HandleFunc("/", handler.RootHandler)
 
 	server := &http.Server{
 		Addr:           ":8080",
@@ -36,6 +38,7 @@ func main() {
 	}
 
 	log.Println("[Main]: Listening for " + server.Addr)
+	db.GetAllTables()
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}
