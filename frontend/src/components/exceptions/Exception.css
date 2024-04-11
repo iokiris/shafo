@@ -1,0 +1,17 @@
+.exception-box, .exception-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+.exception-box svg {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+
+.exception-box p {
+  font-size: 1.2em;
+}

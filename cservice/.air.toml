@@ -1,0 +1,21 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+    cmd = "go build -o ./tmp/main ./cmd/cservice"
+    bin = "tmp/main"
+    include_ext = []
+    exclude_dir = ["assets", "tmp", "vendor"]
+    delay = 1000
+
+[misc]
+    force_polling = true
+
+[log]
+    time = true
+
+[color]
+    main = "yellow"
+    watcher = "cyan"
+    build = "green"
+    runner = "magenta"

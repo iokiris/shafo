@@ -1,0 +1,128 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.login-form input {
+  margin: 15px 0;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  color: #ddd;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #719ECE;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.login-form button {
+  padding: 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  background-image: linear-gradient(145deg, #007bff, #6610f2);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form button:hover {
+  box-shadow: 0 0 4px #719ECE;
+}
+
+.logo {
+  margin-bottom: 5px;
+}
+
+a {
+  color: var(--legit-blue);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.additional-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.register-form {
+  max-width: 400px;
+  width: 100%;
+}
+
+.register-form input, .register-form button {
+  width: calc(100% - 30px);
+}
+
+.login-form input {
+  margin: 7px 0;
+  padding: 15px;
+}
+
+.login-form button {
+  padding: 15px;
+  margin-top: 12px;
+}
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+::placeholder {
+  font-size: 0.8em;   
+}
+
+.confirmation-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.confirmation-message svg {
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .confirmation-message svg {
+    width: 100px;
+  }
+
+  .login-container, .login-form {
+    padding: 20px;
+  }
+}
+
+.invalid-inp {
+  border-color: red !important;
+}
+
+.error-label {
+  text-align: center;
+  font-size: 0.8em;
+  color: red;
+  font-weight: bold;
+}

@@ -1,0 +1,22 @@
+.centralized-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.centralized-box svg {
+    max-width: 300px;
+    max-height: 300px;
+  }
+  
+  
+  .centralized-box p {
+    font-size: 1.2em;
+  }
+
+  .centralized-box a {
+    font-size: 1.1em;
+  }

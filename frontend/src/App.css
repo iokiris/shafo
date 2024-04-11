@@ -1,0 +1,43 @@
+
+
+
+body {
+  margin: 0;
+  color: white;
+  --legit-blue: #007bff;
+  background: rgb(34, 30, 37);
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.App {
+  font-family: 'Roboto', sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  color: #E0E0E0;
+}
+
+.logo {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 2em;
+  background: -webkit-linear-gradient(45deg, #bbb9be, #b9bfc1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  margin: 0;
+}
+
+.invisible {
+  display: none;
+}

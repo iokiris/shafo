@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    # depends_on:
+    #   - backend
+    environment:
+      - WATCHPACK_POLLING=true
+  backend:
+    build: ./backend
+    env_file:
+      - ./.env
+    volumes:
+      - ./backend:/app
+      - ./.env:/app/.env
+    ports:
+      - '8000:8000'
+    environment:
+      - DEBUG=1
+  pgdb:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - '5433:5432'
+  cservice:
+    build: ./cservice
+    volumes:
+      - ./cservice:/app
+      - /app/tmp
+    ports:
+      - '8080:8080'
+    working_dir: /app
+
+volumes:
+  db_data:
