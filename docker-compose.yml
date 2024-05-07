@@ -2,17 +2,19 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
+    image: ghcr.io/iokiris/frontend:latest
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
       - '3000:3000'
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
     environment:
       - WATCHPACK_POLLING=true
   backend:
     build: ./backend
+    image: ghcr.io/iokiris/backend:latest
     env_file:
       - ./.env
     volumes:
@@ -35,6 +37,7 @@ services:
       - '5433:5432'
   cservice:
     build: ./cservice
+    image: ghcr.io/iokiris/cservice:latest
     volumes:
       - ./cservice:/app
       - /app/tmp
