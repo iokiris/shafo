@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    image: ghcr.io/iokiris/frontend:latest
+    image: ghcr.io/iokiris/frontend:0.9.9
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -14,7 +14,7 @@ services:
       - WATCHPACK_POLLING=true
   backend:
     build: ./backend
-    image: ghcr.io/iokiris/backend:latest
+    image: ghcr.io/iokiris/backend:0.9.9
     env_file:
       - ./.env
     volumes:
@@ -37,7 +37,7 @@ services:
       - '5433:5432'
   cservice:
     build: ./cservice
-    image: ghcr.io/iokiris/cservice:latest
+    image: ghcr.io/iokiris/cservice:0.9.9
     volumes:
       - ./cservice:/app
       - /app/tmp
