@@ -10,9 +10,9 @@ RUN go mod tidy
 
 COPY . .
 
+LABEL org.opencontainers.image.source https://github.com/iokiris/shafo
+
 CMD ["CompileDaemon", "-polling=true", "-log-prefix=true", "-build=go build -o ./tmp/myapp ./cmd/cservice", "-command=./tmp/myapp"]
-
-
 
 #FROM golang:1.22.1 as builder
 #

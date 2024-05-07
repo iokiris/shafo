@@ -21,5 +21,6 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+LABEL org.opencontainers.image.source https://github.com/iokiris/shafo
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
