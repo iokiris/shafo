@@ -12,7 +12,6 @@ const EmailConfirm = () => {
     useEffect(() => {
         axios.get(`/auth/confirm_email/${token}`)
             .then(response => {
-                console.log('Email подтвержден', response);
                 setStatus('success');
             })
             .catch(error => {

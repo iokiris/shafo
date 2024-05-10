@@ -61,7 +61,6 @@ const Register = (props) => {
       if (response.status === 201) {
         setEmailSent(true);
       }
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     } finally {

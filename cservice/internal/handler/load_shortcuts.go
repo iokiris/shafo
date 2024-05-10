@@ -38,7 +38,6 @@ func LoadShortcuts(w http.ResponseWriter, r *http.Request) {
 	shortcutsArray, sortedBy, err := db.LoadUserShortcuts(p.UserID, p.Count, p.Offset,
 		p.SortBy, strings.ToLower(p.SearchQuery))
 
-	fmt.Println(shortcutsArray)
 	if err != nil {
 		fmt.Println(err)
 		SendJson(w, http.StatusUnprocessableEntity, map[string]interface{}{

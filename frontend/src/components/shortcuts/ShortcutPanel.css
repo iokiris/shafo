@@ -21,6 +21,11 @@
     align-items: center;
     margin-bottom: 15px;
   }
+
+
+  .shortcut-url:active {
+    opacity: 0.8;
+  }
   
   .shortcut-url {
     color: #007bff;
@@ -38,6 +43,7 @@
   .shortcut-fullurl {
     color: #666;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
   }
   
   .shortcut-metadata {
@@ -154,7 +160,7 @@
   .shortcuts-header {
     padding: 20px 20px 10px 20px;
     box-shadow: 0 0 8px 1px #3b373775;
-    position: relative;
+    position: sticky;
   }
   body {
     background: white;

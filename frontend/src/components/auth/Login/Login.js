@@ -18,7 +18,6 @@ const Login = (props) => {
       if (response.status === 200) {
         props.onSuccess();
       }
-      console.log(response.data);
     } catch (error) {
       if (error.response) {
         const status = error.response.status;

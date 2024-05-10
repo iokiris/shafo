@@ -30,7 +30,7 @@ BASE_URL = env("BASE_URL")
 SECRET_KEY = 'django-insecure-*%tj8j1o0m3q+th+b_tw99m(m402%_)pis53+zhn9s*_jp9^ue'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '*'

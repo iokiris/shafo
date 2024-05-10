@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    image: ghcr.io/iokiris/frontend:0.9.9
+    image: ghcr.io/iokiris/frontend:1.0.0
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -12,9 +12,15 @@ services:
       - backend
     environment:
       - WATCHPACK_POLLING=true
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
   backend:
     build: ./backend
-    image: ghcr.io/iokiris/backend:0.9.9
+    image: ghcr.io/iokiris/backend:1.0.0
     env_file:
       - ./.env
     volumes:
@@ -22,8 +28,12 @@ services:
       - ./.env:/app/.env
     ports:
       - '8000:8000'
-    environment:
-      - DEBUG=1
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
   pgdb:
     image: postgres:latest
     restart: always
@@ -35,15 +45,26 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - '5433:5432'
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
   cservice:
     build: ./cservice
-    image: ghcr.io/iokiris/cservice:0.9.9
+    image: ghcr.io/iokiris/cservice:1.0.0
     volumes:
       - ./cservice:/app
       - /app/tmp
     ports:
       - '8080:8080'
     working_dir: /app
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
 volumes:
   db_data:

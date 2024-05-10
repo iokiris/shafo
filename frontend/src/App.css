@@ -5,7 +5,7 @@ body {
   margin: 0;
   color: white;
   --legit-blue: #007bff;
-  background: rgb(34, 30, 37);
+  background: rgb(34, 30, 37) !important;
 
 }
 
@@ -40,4 +40,11 @@ body, html {
 
 .invisible {
   display: none;
+}
+
+.shafo__copy-svg:hover {
+  opacity: 0.7;
+}
+.shafo__copy-svg:active {
+  opacity: 0.6;
 }

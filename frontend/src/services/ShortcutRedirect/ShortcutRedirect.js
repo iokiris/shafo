@@ -12,9 +12,7 @@ function ShortUrlRedirect() {
       try {
         const response = await axios.get(`/api/redirect/${shortUrl}`);
         if (response.status === 200) {
-            console.log(response);
           const fullUrl  = response.data.redirect_to;
-          console.log(fullUrl);
           if (fullUrl) {
             window.location.href = fullUrl;
           } else {

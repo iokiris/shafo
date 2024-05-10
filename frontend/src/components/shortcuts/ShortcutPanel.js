@@ -3,14 +3,31 @@ import {ru} from 'date-fns/locale'
 import { formatDistanceToNow } from 'date-fns';
 import api from '../../services/api';
 import './ShortcutPanel.css';
- 
+import withAuthCheck from '../highers/withAuthCheck'
+import CopySvg from '../../media/svg/Things/CopySvg';
+const MAX_SHORTCUT_SECTION = 20;
 
-function shortenUrl(url, maxLength = 32) {
-    if (url.length > maxLength) {
-      return url.substring(0, maxLength - 3) + " ...";
-    }
-    return url;
+function ShortenUrl({ url, maxLength = 32 }) {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
+  if (url.length <= maxLength || isExpanded) {
+    if (isExpanded) {return <span>
+      {url} 
+      <span onClick={() => setIsExpanded(false)} style={{ cursor: 'pointer', color: 'var(--legit-blue)' }}> ▲</span>
+      </span>;} 
+      else {
+        return <span>{url}</span>
+      }
   }
+
+  return (
+    <span>
+      {url.substring(0, maxLength - 3)}
+      <span onClick={() => setIsExpanded(true)} style={{ cursor: 'pointer', color: 'var(--legit-blue)' }}> ...</span>
+    </span>
+  );
+}
+
 
 function ShortcutsPanel() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +35,7 @@ function ShortcutsPanel() {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [allLoaded, setAllLoaded] = useState(false);
-  const [sortType, setSortType] = useState('id');
+  const [sortType, setSortType] = useState('created_at');
   const loadingRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUrl, setNewUrl] = useState('');
@@ -29,7 +46,6 @@ function ShortcutsPanel() {
     setOffset(0); 
     setAllLoaded(false); 
     fetchShortcuts(0, sortType); 
-    console.log(sortType)
   }, [sortType]);
 
   useEffect(() => {
@@ -82,7 +98,7 @@ function ShortcutsPanel() {
             setShortcuts(updatedShortcuts);
         }
     } catch (error) {
-        console.error('Ошибка при изменении статуса', error);
+        console.error('Ошибка при изменении статуса');
     }
 };
 
@@ -97,25 +113,34 @@ const addNewShortcut = async () => {
       const newShortcut = response.data.shortcut;
       if (newShortcut) {
         shortcuts.unshift(newShortcut);
-        console.log(shortcuts)
         setNewUrl(''); 
       }
     } catch (error) {
-      console.error('Ошибка при добавлении новой ссылки', error);
+      console.error('Ошибка при добавлении новой ссылки');
     }
   };
   const fetchShortcuts = async (newOffset, sortType, query = searchQuery) => { 
-    if (allLoaded) return;
-    setLoading(true);
-    const response = await fetch(`/api/load_shortcuts/?offset=${newOffset}&sort_by=${sortType}&query=${encodeURIComponent(query)}`, { method: 'GET' });
-    const data = await response.json();
-
-    if (data.shortcuts.length === 0) {
-        setAllLoaded(true);
-    } else {
-        setShortcuts((prevShortcuts) => [...prevShortcuts, ...data.shortcuts]);
+    try {
+      if (allLoaded) {
+        return;
+      };
+      if (loading) return;
+      setLoading(true);
+      const response = await fetch(`/api/load_shortcuts/?offset=${newOffset}&sort_by=${sortType}&query=${encodeURIComponent(query)}`, { method: 'GET' });
+      const data = await response.json();
+      if (data.shortcuts.length < MAX_SHORTCUT_SECTION) {
+          setAllLoaded(true);
+      }
+      if (data.shortcuts.length > 0) {
+        setShortcuts((prevShortcuts) => {
+          const existingIds = new Set(prevShortcuts.map(sc => sc.id));
+          const filteredNewShortcuts = data.shortcuts.filter(sc => !existingIds.has(sc.id));
+          return [...prevShortcuts, ...filteredNewShortcuts];
+        });
+      }
+      setLoading(false);
+    } catch (e) {
     }
-    setLoading(false);
 };
   
   const handleScroll = (e) => {
@@ -150,8 +175,8 @@ const addNewShortcut = async () => {
         <div style={{display: 'flex', gap: '10px'}}>
             <button className="add-button" onClick={() => setIsModalOpen(true)}>Новая ссылка</button>
             <select className="sc-sort-type-selector" value={sortType} onChange={(e) => { setSortType(e.target.value);}}>
-                <option value="id">Сначала старыеㅤ</option>
                 <option value="created_at">Сначала новыеㅤ</option>
+                <option value="id">Сначала старыеㅤ</option>
                 <option value="public">Публичныеㅤ</option>
                 <option value="private">Приватныеㅤ</option>
             </select>
@@ -169,15 +194,23 @@ const addNewShortcut = async () => {
         {shortcuts.map((shortcut, index) => (
             <div key={index} className="shortcut">
             <div className="shortcut-header">
-                <div className="shortcut-url" onClick={() => copyToClipboard(shortcut.short_url)}>
+                <div className="shortcut-url" onClick={() => copyToClipboard(
+                  window.location.origin + "/c/" + shortcut.short_url
+                  )}>
                 {shortcut.short_url}
+                <CopySvg
+                />
                 </div>
                 <button 
                     className={"shortcut-status " + (shortcut.public ? 'sc-active' : 'sc-archived')}
                     onClick={() => toggleShortcutStatus(shortcut.id, shortcut.public)}
                 >{shortcut.public ? 'Активна' : 'Скрыта'}</button>
             </div>
-            <div className="shortcut-fullurl">Переадресация: {shortenUrl(shortcut.full_url)}</div>
+            
+            <div className="shortcut-fullurl" ><CopySvg onClick={() => copyToClipboard(shortcut.full_url)}
+                />Переадресация: <ShortenUrl url={shortcut.full_url} />
+              
+            </div>            
             <div className="shortcut-metadata">Создана: <span>{formatDistanceToNow(new Date(shortcut.created_at), { addSuffix: true, locale: ru })}</span></div>
             </div>
         ))}
@@ -187,4 +220,5 @@ const addNewShortcut = async () => {
   );
 }
 
-export default ShortcutsPanel;
+const AuthSP = withAuthCheck(ShortcutsPanel);
+export default AuthSP;

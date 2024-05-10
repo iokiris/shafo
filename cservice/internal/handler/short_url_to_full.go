@@ -25,7 +25,6 @@ func GetFullUrlFromShort(w http.ResponseWriter, r *http.Request) {
 		SendJson(w, http.StatusNotFound, map[string]string{"error": "Route not found"})
 		return
 	}
-	fmt.Printf("Found route to %s\n", shortcut.FullUrl)
 
 	if !shortcut.Public {
 		SendJson(w, http.StatusForbidden, map[string]interface{}{

@@ -19,7 +19,7 @@ const AuthForm = (props) => {
           navigate('/');
         }
       } catch (error) {
-        console.log('Не авторизован, оставляем на странице входа/регистрации');
+        console.log('Не авторизован.');
       }
     };
 

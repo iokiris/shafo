@@ -8,10 +8,11 @@ import (
 	"cservice/types"
 	"errors"
 	"fmt"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"math/big"
 	"strings"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 var db *pgxpool.Pool
@@ -150,7 +151,6 @@ func LoadUserShortcuts(userId int, count int, offset int,
 	if err != nil {
 		return nil, sortType, err
 	}
-	fmt.Println(searchQ)
 	for q.Next() {
 		var s types.Shortcut
 		if err := q.Scan(&s.Id, &s.ShortUrl, &s.FullUrl, &s.Public, &s.CreatedAt, &s.UserID); err != nil {

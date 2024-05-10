@@ -16,7 +16,6 @@ def get_service_status(name: str) -> str:
 
 #error or short_url
 def cservice_get_shortcut(short_url):
-    print("short_url", short_url)
     response = requests.get(f"http://cservice:8080/getByShort?shortUrl={short_url}")
     return response.json()
 
