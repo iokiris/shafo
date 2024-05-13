@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    image: ghcr.io/iokiris/frontend:1.0.0
+    image: ghcr.io/iokiris/shafo-frontend:1.0.0
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -20,7 +20,7 @@ services:
 
   backend:
     build: ./backend
-    image: ghcr.io/iokiris/backend:1.0.0
+    image: ghcr.io/iokiris/shafo-backend:1.0.0
     env_file:
       - ./.env
     volumes:
@@ -53,7 +53,7 @@ services:
 
   cservice:
     build: ./cservice
-    image: ghcr.io/iokiris/cservice:1.0.0
+    image: ghcr.io/iokiris/shafo-cservice:1.0.0
     volumes:
       - ./cservice:/app
       - /app/tmp
