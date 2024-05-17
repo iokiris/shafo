@@ -28,9 +28,7 @@ func LoadShortcuts(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	if p.Count > constants.MaxShortcutsLoadCount {
-		p.Count = constants.MaxShortcutsLoadCount
-	}
+	p.Count = min(p.Count, constants.MaxShortcutsLoadCount)
 	if p.SortBy == "" {
 		p.SortBy = "id"
 	}

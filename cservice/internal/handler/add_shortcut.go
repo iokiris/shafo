@@ -3,6 +3,7 @@ package handler
 import (
 	"cservice/db"
 	"cservice/types"
+	"cservice/validation"
 	"encoding/json"
 	"net/http"
 	"time"
@@ -23,9 +24,8 @@ func AddShortcut(w http.ResponseWriter, r *http.Request) {
 		SendJson(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	//TODO: валидация URL
-	if data.FullUrl == "" {
-		SendJson(w, http.StatusBadRequest, map[string]string{"error": "Full URL must not be empty"})
+	if !validation.IsValidURL(data.FullUrl) {
+		SendJson(w, http.StatusBadRequest, map[string]string{"error": "Full URL is not valid"})
 		return
 	}
 

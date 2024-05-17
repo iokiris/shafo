@@ -21,12 +21,6 @@ func EditVisibility(w http.ResponseWriter, r *http.Request) {
 		SendJson(w, http.StatusUnprocessableEntity, "Bad json")
 		return
 	}
-	//if data.shortUrl == "" {
-	//	SendJson(w, http.StatusBadRequest, map[string]string{
-	//		"error": "shortUrl is empty",
-	//	})
-	//	return
-	//}
 	id, queryErr := db.EditVisibility(data.Id, data.NewStatus, data.UserId)
 	if queryErr.Error != nil {
 		SendJson(w, http.StatusBadRequest, map[string]string{
