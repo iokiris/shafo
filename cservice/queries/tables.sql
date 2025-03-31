@@ -3,7 +3,7 @@ CREATE TABLE shortcuts (
                            short_url VARCHAR(255) NOT NULL UNIQUE,
                            full_url VARCHAR(2048) NOT NULL,
                            public BOOLEAN NOT NULL,
-                           created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                           created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
                            user_id INT
 );
 

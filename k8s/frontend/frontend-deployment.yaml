@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/iokiris/shafo-frontend:1.0.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "0.5"
+            requests:
+              memory: "256Mi"
+              cpu: "0.25"
+          volumeMounts:
+            - name: frontend-volume
+              mountPath: /app
+      volumes:
+        - name: frontend-volume
+          hostPath:
+            path: /home/cessq19/prog/shafo/k8s/frontend/frontend-deployment.yaml
+            type: Directory
