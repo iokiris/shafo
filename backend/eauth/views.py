@@ -15,7 +15,7 @@ from .throttling import GlobalAuthThrottle
 # Create your views here.
 import logging
 @api_view(['POST'])
-@throttle_classes([GlobalAuthThrottle])
+# @throttle_classes([GlobalAuthThrottle])
 def register_user(request):
     serializer = UserRegSerializer(data=request.data)
     if serializer.is_valid():
@@ -59,23 +59,28 @@ def check_auth(request):
     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 def send_email_confirm(request, user):
-    token = EmailConfirmToken.objects.create(user=user)
-    confirm_url = reverse('confirm_email', args=[token.token])
-    full_url = f'{settings.BASE_URL}{confirm_url}'
-    print('FULL_URL', full_url)
-    context = {
-        'confirmation_url': full_url
-    }
-    html_content = render_to_string('emails/confirm_email.html', context=context)
-    text_content = strip_tags(html_content)
+    # token = EmailConfirmToken.objects.create(user=user)
+    # confirm_url = reverse('confirm_email', args=[token.token])
+    # full_url = f'{settings.BASE_URL}{confirm_url}'
+    # print('FULL_URL', full_url)
+    # context = {
+    #     'confirmation_url': full_url
+    # }
+    # html_content = render_to_string('emails/confirm_email.html', context=context)
+    # text_content = strip_tags(html_content)
+    # try:
+    #     send_email_message(
+    #         request,
+    #         subject=f"SHAFO: {user.username}, подтвердите действие",
+    #         body=text_content,
+    #         to_email=[user.email],
+    #         html_content=html_content
+    #     )
+    # except Exception as e:
+    #     raise e
     try:
-        send_email_message(
-            request,
-            subject=f"SHAFO: {user.username}, подтвердите действие",
-            body=text_content,
-            to_email=[user.email],
-            html_content=html_content
-        )
+        user.confirmed_email = True
+        user.save()
     except Exception as e:
         raise e
 

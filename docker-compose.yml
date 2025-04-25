@@ -35,14 +35,16 @@ services:
           memory: 1024M
 
   pgdb:
-    image: postgres:latest
+    image: postgres:16
     restart: always
     volumes:
-      - db_data:/var/lib/postgresql/data
+    - db_data:/var/lib/postgresql/data
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Скрипт инициализации
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_DB=${POSTGRES_DB}         # База данных для backend
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - C_SERVICE_DB=${C_SERVICE_DB}
     ports:
       - '5433:5432'
     deploy:

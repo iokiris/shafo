@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/iokiris/shafo-backend:1.0.0
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+          envFrom:
+            - secretRef:
+                name: backend-env
+          volumeMounts:
+            - name: backend-volume
+              mountPath: /app
+      volumes:
+        - name: backend-volume
+          hostPath:
+            path: ./backend
+            type: Directory
